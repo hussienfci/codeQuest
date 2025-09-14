@@ -1,57 +1,67 @@
-CodeQuest
-A modern full-stack web application built with React + Vite frontend and NestJS backend
+codeQuest
+A full-stack web application built with React + TypeScript + Vite for the frontend and NestJS for the backend API.
 
-Show Image
-Show Image
-Show Image
-Show Image
-
-🚀 Quick Start
-bash
-# Clone the repository
-git clone <your-repo-url>
-cd codeQuest
-
-# Install dependencies for both frontend and backend
-npm run install:all
-
-# Start development servers
-npm run dev
 🏗️ Tech Stack
-Frontend	Backend
-React 18	NestJS
-TypeScript	TypeScript
-Vite	Node.js
-ESLint	Jest Testing
+Frontend:
+
+React 18
+TypeScript
+Vite (for fast development and building)
+ESLint for code quality
+Backend:
+
+NestJS (Progressive Node.js framework)
+TypeScript
+Built for scalable server-side applications
 📁 Project Structure
 codeQuest/
 ├── frontend/          # React + Vite application
 ├── backend/           # NestJS API
-├── package.json       # Root package.json with scripts
 └── README.md
+🚀 Getting Started
+Prerequisites
+Node.js (v16 or higher)
+npm or yarn
+Frontend Setup (React + Vite)
+Navigate to the frontend directory and install dependencies:
+
+bash
+cd frontend
+npm install
+Backend Setup (NestJS)
+Navigate to the backend directory and install dependencies:
+
+bash
+cd backend
+npm install
 🔧 Development
+Frontend Development
 bash
-# Frontend (http://localhost:5173)
-npm run dev:frontend
+cd frontend
 
-# Backend (http://localhost:3000)
-npm run dev:backend
-
-# Both simultaneously
+# Start development server with hot reload
 npm run dev
-📦 Build & Deploy
-bash
-# Build frontend
-npm run build:frontend
 
-# Build backend
-npm run build:backend
-
-# Build both
+# Build for production
 npm run build
 
-# Deploy to production
-npm run deploy
+# Preview production build
+npm run preview
+
+# Run linting
+npm run lint
+Backend Development
+bash
+cd backend
+
+# Development mode
+npm run start
+
+# Watch mode (auto-restart on changes)
+npm run start:dev
+
+# Production mode
+npm run start:prod
 🧪 Testing
 bash
 # Frontend tests
@@ -91,3 +101,4 @@ Open a Pull Request
 MIT License - see LICENSE file for details.
 
 <div align="center"> <strong>Built with ❤️ using modern web technologies</strong> </div>
+
