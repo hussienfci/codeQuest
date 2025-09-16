@@ -1,7 +1,7 @@
 import { Module, forwardRef } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { UserModule } from '../user/user.module';
+import { UsersModule } from 'src/users/users.module';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { AuthService } from './auth.service';
 // import { AppleStrategy } from './strategy/apple.strategy';
@@ -9,8 +9,8 @@ import { AuthService } from './auth.service';
 
 @Module({
   imports: [
-    forwardRef(() => UserModule),
-    PassportModule.register({ defaultStrategy: 'jwt', 'apple': 'apple' }),
+    forwardRef(() => UsersModule),
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: 'T!@!8934',
       signOptions: { expiresIn: '1d' }

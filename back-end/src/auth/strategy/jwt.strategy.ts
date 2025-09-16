@@ -1,7 +1,7 @@
 import { Injectable, Inject, forwardRef, UnauthorizedException } from '@nestjs/common'
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from "passport-jwt";
-import { UserService } from '../../user/user.service';
+import { UsersService } from 'src/users/users.service';
 import { Request } from 'express';
 
 
@@ -9,8 +9,8 @@ import { Request } from 'express';
 export class JwtStrategy extends PassportStrategy(Strategy) {
 
     constructor(
-        @Inject(forwardRef(() => UserService))
-        private readonly userService: UserService
+        @Inject(forwardRef(() => UsersService))
+        private readonly userService: UsersService
     ) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -29,12 +29,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         }
 
         const user = await this.userService.findOne(validationPayload.id);
-        if (!user || user.data.token !== jwtToken) {
-            throw new UnauthorizedException('Invalid user or token');
-        }
+        console.log(user);
+        
+        // if (!user || user.data.token !== jwtToken) {
+        //     throw new UnauthorizedException('Invalid user or token');
+        // }
 
         // Return user object including the role
-        return { userId: user.data.id, role: user.data.role };  // Assuming `user.role` is either 'user' or 'admin'
+        // return { userId: user.data.id, role: user.data.role };  // Assuming `user.role` is either 'user' or 'admin'
     }
 
     private extractJwtToken(request: Request): string | null {
