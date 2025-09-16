@@ -13,12 +13,14 @@ export class AuthService {
 
     async generateAccessToken(payload: any) {
         const user = await this.userServices.findOne(payload.id); 
+        // console.log(user);
+        
+        const access_token = await this.jwtService.signAsync({ id: user.data.id, role: user.data.role }, { secret: 'T!@!8934' });
+        await this.userServices.updateAccessToken(user.data.id, access_token)
         console.log(user);
         
-        // const access_token = await this.jwtService.signAsync({ id: user.data.id, role: user.data.role }, { secret: 'T!@!8934' });
-        // await this.userServices.updateAccessToken(user.data.id, access_token)
         return {
-            // access_token: access_token,
+            access_token: access_token,
         }
     }
 }

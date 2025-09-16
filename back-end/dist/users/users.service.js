@@ -67,8 +67,10 @@ let UsersService = class UsersService {
             const { password, ...otherData } = createUserDto;
             const hashPassword = await bycrpt.hash(password, 10);
             const newUser = this.userRepo.create({ password: hashPassword, ...otherData });
+            console.log('xzczxc');
             const savedUser = await this.userRepo.save(newUser);
             const access_token = await this.authService.generateAccessToken(savedUser);
+            console.log(access_token);
             return this.response.success(classes_1.SuccessStatusCodesEnum.Created, 'user created successfully', access_token);
         }
         catch (error) {
@@ -97,8 +99,16 @@ let UsersService = class UsersService {
     findAll() {
         return `This action returns all users`;
     }
-    findOne(id) {
-        return `This action returns a #${id} user`;
+    async findOne(id) {
+        try {
+            const user = await this.userRepo.findOneBy({ id });
+            if (!user)
+                return this.response.error(classes_1.ErrorStatusCodesEnum.NotFound, 'user not found');
+            return this.response.success(classes_1.SuccessStatusCodesEnum.Ok, 'user fetched sucessfully', user);
+        }
+        catch (error) {
+            return this.response.error(classes_1.ErrorStatusCodesEnum.BadRequest, error.message);
+        }
     }
     update(id, updateUserDto) {
         return `This action updates a #${id} user`;

@@ -31,12 +31,12 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         const user = await this.userService.findOne(validationPayload.id);
         console.log(user);
         
-        // if (!user || user.data.token !== jwtToken) {
-        //     throw new UnauthorizedException('Invalid user or token');
-        // }
+        if (!user || user.data.token !== jwtToken) {
+            throw new UnauthorizedException('Invalid user or token');
+        }
 
         // Return user object including the role
-        // return { userId: user.data.id, role: user.data.role };  // Assuming `user.role` is either 'user' or 'admin'
+        return { userId: user.data.id, role: user.data.role };  // Assuming `user.role` is either 'user' or 'admin'
     }
 
     private extractJwtToken(request: Request): string | null {

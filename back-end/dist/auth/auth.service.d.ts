@@ -4,5 +4,7 @@ export declare class AuthService {
     private readonly jwtService;
     private readonly userServices;
     constructor(jwtService: JwtService, userServices: UsersService);
-    generateAccessToken(payload: any): Promise<{}>;
+    generateAccessToken(payload: any): Promise<{
+        access_token: string;
+    }>;
 }

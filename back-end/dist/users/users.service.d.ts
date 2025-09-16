@@ -14,7 +14,7 @@ export declare class UsersService {
     login(loginUserDto: LoginUserDto): Promise<import("../interfaces").Response>;
     updateAccessToken(userId: number, refreshToken: string): Promise<void>;
     findAll(): string;
-    findOne(id: number): string;
+    findOne(id: number): Promise<import("../interfaces").Response>;
     update(id: number, updateUserDto: UpdateUserDto): string;
     remove(id: number): string;
 }

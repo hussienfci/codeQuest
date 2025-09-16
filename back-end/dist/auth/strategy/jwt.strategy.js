@@ -35,6 +35,10 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
         }
         const user = await this.userService.findOne(validationPayload.id);
         console.log(user);
+        if (!user || user.data.token !== jwtToken) {
+            throw new common_1.UnauthorizedException('Invalid user or token');
+        }
+        return { userId: user.data.id, role: user.data.role };
     }
     extractJwtToken(request) {
         const authHeader = request.headers.authorization;

@@ -7,7 +7,7 @@ export declare class UsersController {
     constructor(usersService: UsersService);
     create(createUserDto: CreateUserDto): Promise<import("../interfaces").Response>;
     login(loginUserDto: LoginUserDto): Promise<import("../interfaces").Response>;
-    findOne(id: string): string;
+    findOne(id: string): Promise<import("../interfaces").Response>;
     update(id: string, updateUserDto: UpdateUserDto): string;
     remove(id: string): string;
 }
