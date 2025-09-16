@@ -11,7 +11,7 @@ import { Role } from 'src/auth/decorator/roles.decorator';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('auth/register')
+  @Post('/register')
   async create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
   }

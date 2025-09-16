@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useState } from "react";
 import { Label} from "../ui/label";
 import { Input } from "../ui/input";
@@ -7,6 +7,7 @@ import { cn } from "../../lib/utils";
 import { useDispatch, useSelector } from 'react-redux';
 import {type AppDispatch, type RootState} from '../../store/store';
 import {useNavigate } from 'react-router-dom'
+import { signUp } from "../../services/userService";
 
 export function SignupFormDemo() {
   
