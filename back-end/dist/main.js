@@ -7,23 +7,25 @@ const swagger_1 = require("@nestjs/swagger");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.enableCors({
-        origin: true,
+        origin: '*',
         methods: "GET,POST,PUT,PATCH,DELETE",
-        Credential: true
+        credential: true
     });
     app.useGlobalPipes(new common_1.ValidationPipe({
         transform: true,
-        whitelist: true,
+        whitelist: false,
     }));
     const config = new swagger_1.DocumentBuilder()
-        .setTitle('NestJs Test API')
+        .setTitle('Code-Quest Test API')
         .setDescription('API documentation for the NestJs')
         .setVersion('1.0')
         .addBearerAuth()
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, document);
-    await app.listen(process.env.PORT);
+    const port = process.env.PORT || 3000;
+    await app.listen(port);
+    console.log(`Server running on http://localhost:${port}`);
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

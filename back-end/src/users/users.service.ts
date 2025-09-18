@@ -23,7 +23,7 @@ export class UsersService {
       const {password , ...otherData} = createUserDto ; 
       const hashPassword = await bycrpt.hash(password , 10)
       const newUser = this.userRepo.create({password:hashPassword , ...otherData}) ; 
-      console.log('xzczxc');
+      // console.log('xzczxc');
       
       const savedUser = await this.userRepo.save(newUser) ; 
       const access_token = await this.authService.generateAccessToken(savedUser) ; 
@@ -51,6 +51,14 @@ export class UsersService {
     }catch(error){
       return this.response.error(ErrorStatusCodesEnum.BadRequest , error.message) ;
     }
+  }
+
+  async validateToken(id:number){
+    const user = await this.userRepo.findOneBy({id}) ; 
+    return this.response.success(SuccessStatusCodesEnum.Ok , 
+      'Token validated successfully' , 
+      {user, access_token : user?.token} 
+    )
   }
 
   async updateAccessToken(userId: number , refreshToken: string ){

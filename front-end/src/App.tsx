@@ -1,6 +1,7 @@
-import { useState } from 'react'
 
-import './App.css'
+
+import './App.css' ; 
+import Form from './app/Register/Form'
 
 function App() {
   
@@ -8,7 +9,8 @@ function App() {
 
   return (
     <>
-      
+    
+      <Form/>
      
 
     </>

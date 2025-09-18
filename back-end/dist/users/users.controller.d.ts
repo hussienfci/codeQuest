@@ -8,6 +8,7 @@ export declare class UsersController {
     create(createUserDto: CreateUserDto): Promise<import("../interfaces").Response>;
     login(loginUserDto: LoginUserDto): Promise<import("../interfaces").Response>;
     findOne(id: string): Promise<import("../interfaces").Response>;
+    validateToken(req: any): Promise<import("../interfaces").Response>;
     update(id: string, updateUserDto: UpdateUserDto): string;
     remove(id: string): string;
 }

@@ -8,23 +8,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import {type AppDispatch, type RootState} from '../../store/store';
 import {useNavigate } from 'react-router-dom'
 import { signUp } from "../../services/userService";
-
+import { EyeInvisibleOutlined, EyeInvisibleTwoTone, EyeOutlined, EyeTwoTone} from '@ant-design/icons' ; 
+ 
 export function SignupFormDemo() {
   
       const [email , setEmail] = useState('') ; 
-      const [password , setPassword] = useState ('') ; 
+      const [userName , setUserName] = useState('')
+      const [password , setPassword] = useState ('') ;
+      const [showPassword , setShowPassword]  = useState(false) ;  
       const dispatch = useDispatch<AppDispatch> ( ) ; 
       const {error , isLoading } = useSelector((state:RootState) => state.auth) 
       const navigate = useNavigate();
   
       
 
+      const handleShowPassword = ()=>{
+        setShowPassword(!showPassword); 
+      }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try{
-
-      const resultAction = await dispatch(signUp({email , password})) ; 
-
+      
+      const resultAction = await dispatch(signUp({email, userName , password})) ; 
+      console.log(resultAction.type);
+      
       if(signUp.fulfilled.match(resultAction))
         navigate('/dashboard') ; 
       else if(signUp.rejected.match(resultAction))
@@ -54,18 +61,38 @@ export function SignupFormDemo() {
           required
            />
         </LabelInputContainer>
+       
+        <LabelInputContainer className="mb-4">
+          <Label htmlFor="UserName">User Name</Label>
+          <Input 
+          onChange={(e) => setUserName(e.target.value)}
+          value={userName}
+          id="userName" 
+          placeholder="hussien.m"
+          type="text" 
+          required
+           />
+        </LabelInputContainer> 
+        
         <LabelInputContainer className="mb-4">
           <Label htmlFor="password">Password</Label>
+          
           <Input
            id="password"
             placeholder="••••••••"
             onChange={(e)=> setPassword(e.target.value)}
             value={password}
-            type="password" 
+            type={showPassword?"text": "password"} 
             required
+            
             />
+            <span onClick={handleShowPassword} className="text-white">
+              {showPassword?<EyeTwoTone /> : <EyeInvisibleTwoTone /> }
+              {showPassword? ' show password': ' Hide password'}
+            </span>
         </LabelInputContainer>
    
+
 
         <button
           className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"

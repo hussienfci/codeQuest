@@ -1,13 +1,19 @@
-export const handleResponse = async (res: Response): Promise<any> => {
+export const handleResponse = async (res: Response , {rejectWithValue }: any) : Promise<any> => {
+    try {
     if (!res.ok) {
         console.log(res);
         
         const error = await res.json()
-        throw new Error(error.message || 'Request failed')
+        console.log(res);
+        
+        return rejectWithValue(res)
+        // throw new Error(error.message || 'Request failed')
     }
-    try {
+
         return await res.json()
-    } catch {
-        return
+    } catch(error) {
+        return rejectWithValue(
+        error instanceof Error ? error.message : "Unknown error"
+      );
     }
 }

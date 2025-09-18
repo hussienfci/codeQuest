@@ -1,30 +1,35 @@
 "use client";
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils';
-import { signIn, signUp } from '@/services/authService';
-import { AppDispatch, RootState } from '@/store/store';
-import { useRouter } from 'next/navigation';
+import { Input } from '../../components/ui/input';
+import { Label } from '@radix-ui/react-label';
+import { cn } from '../../lib/utils';
+import { login, signUp } from '../../services/userService';
+import { type AppDispatch,type RootState } from '../../store/store';
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 
 function LogIn() {
     const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = useState(true);
   const [name, setName] = useState(''); 
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>(); 
+  const [showPassword , setShowPassword]  = useState(false) ;       
   const { error, isLoading } = useSelector((state: RootState) => state.auth);
-  const router = useRouter();
+  const navigate = useNavigate();
 
+  const handleShowPassword = ()=>{
+    setShowPassword(!showPassword); 
+  }
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       if (isLogin) {
-        await dispatch(signIn({email, password}));
-        router.push('/dashboard');
+        await dispatch(login({email, password}));
+        navigate('/dashboard');
       } else {
-        router.push('/Register')
+        navigate('/Register')
       }
     } catch (error) {
       console.error('Authentication failed:', error);
@@ -62,6 +67,10 @@ function LogIn() {
                 type="password" 
                 required
                 />
+            <span onClick={handleShowPassword}>
+              {showPassword?<EyeOutlined />: <EyeInvisibleOutlined /> }
+              {showPassword? ' show password': ' Hide password'}
+            </span>
             </LabelInputContainer>
     
 

@@ -1,9 +1,8 @@
-'use client';
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import dynamic from "next/dynamic";
 
-const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
+import { useSelector } from "react-redux";
+import {type RootState } from "../../../store/store";
+// const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
+import Plot from 'react-plotly.js';
 
 type TableRow={
     price?: number ; 
@@ -74,3 +73,7 @@ function Chart() {
 }
 
 export default Chart
+function dynamic(arg0: () => Promise<any>, arg1: { ssr: boolean; }) {
+  throw new Error("Function not implemented.");
+}
+

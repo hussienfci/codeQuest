@@ -14,6 +14,7 @@ const typeorm_1 = require("typeorm");
 let User = class User {
     id;
     userName;
+    email;
     password;
     token;
     role;
@@ -27,6 +28,10 @@ __decorate([
     (0, typeorm_1.Column)({ unique: true }),
     __metadata("design:type", String)
 ], User.prototype, "userName", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ unique: true }),
+    __metadata("design:type", String)
+], User.prototype, "email", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)

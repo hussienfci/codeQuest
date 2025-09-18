@@ -1,8 +1,7 @@
-"use client";
-import React from 'react'
+
 import Chart from './components/Chart'
 import Table from './components/Table'
-import ProtectedRoute from '@/components/normal/ProtectedRoute';
+import ProtectedRoute from '../../components/normal/ProtectedRoute';
 
 function Dashboard() {
   return (

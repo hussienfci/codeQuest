@@ -67,7 +67,6 @@ let UsersService = class UsersService {
             const { password, ...otherData } = createUserDto;
             const hashPassword = await bycrpt.hash(password, 10);
             const newUser = this.userRepo.create({ password: hashPassword, ...otherData });
-            console.log('xzczxc');
             const savedUser = await this.userRepo.save(newUser);
             const access_token = await this.authService.generateAccessToken(savedUser);
             console.log(access_token);
@@ -90,6 +89,10 @@ let UsersService = class UsersService {
         catch (error) {
             return this.response.error(classes_1.ErrorStatusCodesEnum.BadRequest, error.message);
         }
+    }
+    async validateToken(id) {
+        const user = await this.userRepo.findOneBy({ id });
+        return this.response.success(classes_1.SuccessStatusCodesEnum.Ok, 'Token validated successfully', { user, access_token: user?.token });
     }
     async updateAccessToken(userId, refreshToken) {
         await this.userRepo.update(userId, {

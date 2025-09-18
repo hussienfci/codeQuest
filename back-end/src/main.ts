@@ -6,20 +6,21 @@ async function bootstrap() {
     const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin:true,
+    origin:'*',
+    // mode: 'no-cors',
     methods:"GET,POST,PUT,PATCH,DELETE",
-    Credential:true
+    credential:true
   })
   
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
-      whitelist: true,
+      whitelist: false,
     }),
   );
 
   const config = new DocumentBuilder()
-    .setTitle('NestJs Test API')
+    .setTitle('Code-Quest Test API')
     .setDescription('API documentation for the NestJs')
     .setVersion('1.0')
     .addBearerAuth()
@@ -27,6 +28,10 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  await app.listen(process.env.PORT as string );
+  // await app.listen(process.env.PORT as string);
+  
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+  console.log(`Server running on http://localhost:${port}`);
 }
 bootstrap();

@@ -16,7 +16,7 @@ function ProtectedRoute({children}:ProtectedRouteProps) {
         if (!isLoading && !currentUser) {
           console.log(isLoading , '\n' , currentUser) ;
           
-           navigate('/login');
+           navigate('/Register');
         }
     }, [currentUser, isLoading, navigate]);
     

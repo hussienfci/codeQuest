@@ -1,15 +1,18 @@
 
 export interface ApiUser {
-  
+      
       id?: string;
-      username: string;
+      userName: string;
+      email?:string ;
       password?:string ;
+      // token?: string ;  
   
 }
 export interface AuthState{
     currentUser:ApiUser | null ; 
     isLoading: boolean ; 
     error:string | null ; 
+    access_token: string | null; 
 }
 
 export interface SingelUser {
@@ -30,15 +33,17 @@ export interface LoginCredentials {
 export interface signUpCredentials {
   email: string;
   password: string;
+  userName: string ;
 }
 
 export interface AuthResponse {
   data: {
     user: {
-      role: "admin" | "user";
-      username: string;
+      role?: "admin" | "user";
+      userName: string;
       password?:string ; 
+      email? :string ;
     };
-    token: string;
+    access_token?: string;
   };
 }

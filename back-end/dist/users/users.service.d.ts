@@ -12,6 +12,7 @@ export declare class UsersService {
     constructor(userRepo: Repository<User>, response: Expose, authService: AuthService);
     createUser(createUserDto: CreateUserDto): Promise<import("../interfaces").Response>;
     login(loginUserDto: LoginUserDto): Promise<import("../interfaces").Response>;
+    validateToken(id: number): Promise<import("../interfaces").Response>;
     updateAccessToken(userId: number, refreshToken: string): Promise<void>;
     findAll(): string;
     findOne(id: number): Promise<import("../interfaces").Response>;

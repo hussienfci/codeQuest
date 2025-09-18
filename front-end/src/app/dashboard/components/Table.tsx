@@ -1,11 +1,11 @@
-'use client';
+
 import  { useState } from 'react' ; 
 
 import type { ColDef } from "ag-grid-community";
 import { AllCommunityModule, ModuleRegistry, themeAlpine, themeBalham, themeMaterial, themeQuartz } from "ag-grid-community";
 import { AgGridReact } from 'ag-grid-react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../lib/store';
+import { type RootState } from '../../../store/store';
 
 
 ModuleRegistry.registerModules([AllCommunityModule]);
